@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restricted Access</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 50px;
+        }
+        .glitch {
+            font-size: 2em;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            animation: glitch 1s infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px red, -2px -2px blue; }
+            50% { text-shadow: -2px -2px red, 2px 2px blue; }
+            100% { text-shadow: 2px -2px red, -2px 2px blue; }
+        }
+        .warning {
+            color: red;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 30px;
+            border: 2px solid lime;
+            padding: 20px;
+            display: inline-block;
+            text-align: left;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .hidden-text {
+            color: black;
+            user-select: none;
+        }
+        .terminal {
+            background-color: black;
+            color: lime;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid lime;
+            width: 80%;
+            margin: auto;
+            text-align: left;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="glitch">ACCESS RESTRICTED</h1>
+    <p class="warning">WARNING: Unauthorized access detected!</p>
+    <div class="container">
+        <p>Welcome to the Underground Network.</p>
+        <p>Decryption in progress...<span id="dots"></span></p>
+        <p>Tracing your location...</p>
+    </div>
+    <div class="terminal" id="terminal">
+        Initializing...
+    </div>
+    <script>
+        let dots = document.getElementById("dots");
+        let count = 0;
+        setInterval(() => {
+            count = (count + 1) % 4;
+            dots.innerText = ".".repeat(count);
+        }, 500);
+        
+        let terminal = document.getElementById("terminal");
+        let messages = [
+            "Verifying credentials...",
+            "Accessing secure files...",
+            "Bypassing firewall...",
+            "Decrypting data...",
+            "Tracing IP address...",
+            "Remote access granted..."
+        ];
+        let index = 0;
+        function typeMessage() {
+            if (index < messages.length) {
+                let para = document.createElement("p");
+                para.textContent = messages[index];
+                terminal.appendChild(para);
+                index++;
+                terminal.scrollTop = terminal.scrollHeight;
+                setTimeout(typeMessage, 2000);
+            }
+        }
+        setTimeout(typeMessage, 1000);
+    </script>
+</body>
+</html>
